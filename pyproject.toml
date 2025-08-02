@@ -3,7 +3,7 @@ name = "tradingagents"
 version = "0.1.0"
 description = "Add your description here"
 readme = "README.md"
-requires-python = ">=3.10"
+requires-python = ">=3.10,<4.0"
 dependencies = [
     "akshare>=1.16.98",
     "backtrader>=1.9.78.123",
@@ -14,12 +14,11 @@ dependencies = [
     "finnhub-python>=2.4.23",
     "langchain-anthropic>=0.3.15",
     "langchain-experimental>=0.3.4",
-    "langchain-google-genai>=2.1.5",
     "langchain-openai>=0.3.23",
     "langgraph>=0.4.8",
     "pandas>=2.3.0",
     "parsel>=1.10.0",
-    "praw>=7.8.1",
+    "praw>=7.8.1; python_version >= '3.6' and python_version < '4.0'",
     "pytz>=2025.2",
     "questionary>=2.1.0",
     "redis>=6.2.0",
@@ -31,4 +30,5 @@ dependencies = [
     "tushare>=1.4.21",
     "typing-extensions>=4.14.0",
     "yfinance>=0.2.63",
+    "langchain-google-genai (>=2.1.8,<3.0.0)",
 ]
