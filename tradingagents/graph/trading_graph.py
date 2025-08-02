@@ -65,8 +65,17 @@ class TradingAgentsGraph:
             self.deep_thinking_llm = ChatAnthropic(model=self.config["deep_think_llm"], base_url=self.config["backend_url"])
             self.quick_thinking_llm = ChatAnthropic(model=self.config["quick_think_llm"], base_url=self.config["backend_url"])
         elif self.config["llm_provider"].lower() == "google":
-            self.deep_thinking_llm = ChatGoogleGenerativeAI(model=self.config["deep_think_llm"])
-            self.quick_thinking_llm = ChatGoogleGenerativeAI(model=self.config["quick_think_llm"])
+            self.deep_thinking_llm = ChatGoogleGenerativeAI(
+                model=self.config["deep_think_llm"],
+                google_api_key=os.getenv("GOOGLE_API_KEY"),
+                project=os.getenv("GOOGLE_CLOUD_PROJECT")
+            )
+            self.quick_thinking_llm = ChatGoogleGenerativeAI(
+                model=self.config["quick_think_llm"],
+                google_api_key=os.getenv("GOOGLE_API_KEY"),
+                project=os.getenv("GOOGLE_CLOUD_PROJECT")
+            )
+
         else:
             raise ValueError(f"Unsupported LLM provider: {self.config['llm_provider']}")
         
@@ -247,7 +256,7 @@ class TradingAgentsGraph:
         )
         self.reflector.reflect_risk_manager(
             self.curr_state, returns_losses, self.risk_manager_memory
-        )
+       )
 
     def process_signal(self, full_signal):
         """Process a signal to extract the core decision."""
